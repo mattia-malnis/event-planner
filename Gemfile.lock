@@ -127,6 +127,12 @@ GEM
       rubocop
       smart_properties
     erubi (1.13.0)
+    factory_bot (6.4.6)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.4.3)
+      factory_bot (~> 6.4)
+      railties (>= 5.0.0)
+    ffaker (2.23.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.5)
@@ -343,6 +349,8 @@ DEPENDENCIES
   debug
   devise (~> 4.9, >= 4.9.4)
   erb_lint (~> 0.5.0)
+  factory_bot_rails (~> 6.4)
+  ffaker (~> 2.23)
   importmap-rails
   jbuilder
   letter_opener (~> 1.10)

@@ -62,6 +62,9 @@ group :development, :test do
 
   # Brings back `assigns` and `assert_template` to your Rails tests [https://github.com/rails/rails-controller-testing]
   gem "rails-controller-testing", "~> 1.0"
+
+  # Fake data generation [https://github.com/ffaker/ffaker]
+  gem "ffaker", "~> 2.23"
 end
 
 group :development do
@@ -82,4 +85,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+
+  # A library for setting up Ruby objects as test data [https://github.com/thoughtbot/factory_bot_rails]
+  gem "factory_bot_rails", "~> 6.4"
 end
