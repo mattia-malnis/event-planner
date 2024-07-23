@@ -10,9 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_23_083719) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_23_155741) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "events", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description"
+    t.string "country", null: false
+    t.datetime "date", null: false
+    t.decimal "lat", precision: 10, scale: 8
+    t.decimal "long", precision: 11, scale: 8
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.check_constraint "lat >= '-90'::integer::numeric AND lat <= 90::numeric", name: "lat_check"
+    t.check_constraint "long >= '-180'::integer::numeric AND long <= 180::numeric", name: "long_check"
+  end
+
+  create_table "events_users", id: false, force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "event_id"
+    t.index ["event_id"], name: "index_events_users_on_event_id"
+    t.index ["user_id"], name: "index_events_users_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
