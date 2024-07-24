@@ -1,0 +1,7 @@
+<div class="min-h-full w-full sm:w-10/12 lg:w-8/12 mx-auto px-4 lg:px-0 py-8 lg:py-12">
+  <% if @events.present? %>
+    <%= render @show_all ? "all_events_listing" : "user_events_listing" %>
+  <% else %>
+  <%= render partial: "no_events" %>
+  <% end %>
+</div>

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Pages", type: :request do
+RSpec.describe "Events", type: :request do
   let(:user) { FactoryBot.create :user }
 
   describe "GET /index" do

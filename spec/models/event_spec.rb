@@ -5,6 +5,15 @@ RSpec.describe Event, type: :model do
 
   context "associations" do
     it { should have_and_belong_to_many(:users) }
+
+    it "can have many users" do
+      user1 = FactoryBot.create :user
+      user2 = FactoryBot.create :user
+      event.users << user1
+      event.users << user2
+
+      expect(event.users).to include(user1, user2)
+    end
   end
 
   context "validations" do
@@ -50,6 +59,16 @@ RSpec.describe Event, type: :model do
       expect(event).not_to be_valid
       event.long = -190
       expect(event).not_to be_valid
+    end
+  end
+
+  describe ".ordered" do
+    it "returns events ordered by date" do
+      event1 = FactoryBot.create(:event, date: 1.day.from_now)
+      event2 = FactoryBot.create(:event, date: 2.days.from_now)
+      event3 = FactoryBot.create(:event, date: 3.days.from_now)
+
+      expect(Event.ordered).to eq([ event1, event2, event3 ])
     end
   end
 end
