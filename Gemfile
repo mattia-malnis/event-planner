@@ -44,6 +44,9 @@ gem "redis", "~> 4.0"
 # Flexible authentication solution for Rails with Warden [https://github.com/heartcombo/devise]
 gem "devise", "~> 4.9", ">= 4.9.4"
 
+# Embed SVG documents in your Rails views and style them with CSS [https://github.com/jamesmartin/inline_svg]
+gem "inline_svg", "~> 1.9"
+
 group :development, :test do
   # A static analysis security vulnerability scanner for Ruby on Rails applications [https://github.com/presidentbeef/brakeman]
   gem "brakeman", require: false

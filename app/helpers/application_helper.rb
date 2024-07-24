@@ -15,4 +15,10 @@ module ApplicationHelper
 
     date.strftime("%b %d, %Y")
   end
+
+  def to_datetime(date)
+    return if date.blank?
+
+    date.strftime("%b %d, %Y - %H:%M")
+  end
 end
