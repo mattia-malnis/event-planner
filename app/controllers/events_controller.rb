@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_event, only: [ :show ]
+  before_action :find_event, only: [ :show, :toggle_subscription ]
 
   def index
     # If we have the query string `all=y`, we show all the events; otherwise, only the events associated with the user
@@ -9,6 +9,11 @@ class EventsController < ApplicationController
   end
 
   def show
+  end
+
+  # Toggles the subscription status of the current user for the event
+  def toggle_subscription
+    current_user.toggle_event!(@event)
   end
 
   private

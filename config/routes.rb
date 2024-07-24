@@ -10,5 +10,9 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :events, only: [ :show ]
+  resources :events, only: [ :show ] do
+    member do
+      post :toggle_subscription
+    end
+  end
 end
