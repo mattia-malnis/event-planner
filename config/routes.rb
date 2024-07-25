@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :events, only: [ :show ] do
     member do
       post :toggle_subscription
+      get :weather
     end
   end
 end

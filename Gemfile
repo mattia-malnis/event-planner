@@ -68,6 +68,9 @@ group :development, :test do
 
   # Fake data generation [https://github.com/ffaker/ffaker]
   gem "ffaker", "~> 2.23"
+
+  # A Ruby gem to load environment variables from `.env` [https://github.com/bkeepers/dotenv]
+  gem "dotenv-rails", "~> 3.1", ">= 3.1.2"
 end
 
 group :development do

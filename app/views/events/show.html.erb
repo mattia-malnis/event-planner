@@ -11,5 +11,6 @@
       <%= inline_svg_tag("calendar.svg", class: "w-5 mr-1") %> <%= to_datetime(@event.date) %>
     </span>
   </p>
+  <%= turbo_frame_tag "load-details", src: weather_event_path(@event) %>
   <p class="mt-4 mb-6 whitespace-break-spaces"><%= @event.description %></p>
 </div>

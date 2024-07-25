@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_event, only: [ :show, :toggle_subscription ]
+  before_action :find_event, only: [ :show, :toggle_subscription, :weather ]
 
   def index
     # If we have the query string `all=y`, we show all the events; otherwise, only the events associated with the user
@@ -14,6 +14,20 @@ class EventsController < ApplicationController
   # Toggles the subscription status of the current user for the event
   def toggle_subscription
     current_user.toggle_event!(@event)
+  end
+
+  def weather
+    o = OpenWeather.new
+    result = o.get_forecast(@event.date, @event.lat, @event.long)
+
+    # No forecast found
+    render plain: "" unless result.dig(:success)
+
+    @description = result.dig(:description)
+    @humidity = result.dig(:humidity)
+    @min = result.dig(:temperature, :min)
+    @max = result.dig(:temperature, :max)
+    @icon = result.dig(:icon)
   end
 
   private
