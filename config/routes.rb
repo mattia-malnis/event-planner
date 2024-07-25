@@ -16,4 +16,8 @@ Rails.application.routes.draw do
       get :weather
     end
   end
+
+  namespace :api do
+    resources :events
+  end
 end

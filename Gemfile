@@ -71,6 +71,9 @@ group :development, :test do
 
   # A Ruby gem to load environment variables from `.env` [https://github.com/bkeepers/dotenv]
   gem "dotenv-rails", "~> 3.1", ">= 3.1.2"
+
+  # Pagination gem [https://github.com/ddnexus/pagy]
+  gem "pagy", "~> 9.0", ">= 9.0.2"
 end
 
 group :development do
