@@ -20,6 +20,17 @@ RSpec.describe User, type: :model do
       user.email = nil
       expect(user).not_to be_valid
     end
+
+    it "is not valid with duplicated or blank api_key" do
+      user2 = FactoryBot.create :user
+      user2.api_key = "DuplicatedApiKey"
+      user2.save
+
+      user.api_key = "DuplicatedApiKey"
+      expect(user).not_to be_valid
+      user.api_key = nil
+      expect(user).not_to be_valid
+    end
   end
 
   describe "signed_up_for_event?(event)" do
