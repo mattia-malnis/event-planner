@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
   def alert_error(messages, title = "")
     return if messages.blank?
 

@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  include Pagy::Backend
+
   before_action :authenticate_user!
   before_action :find_event, only: [ :show, :toggle_subscription, :weather ]
 
@@ -6,6 +8,7 @@ class EventsController < ApplicationController
     # If we have the query string `all=y`, we show all the events; otherwise, only the events associated with the user
     @show_all = params[:all] == "y"
     @events = @show_all ? Event.all.ordered : current_user.events.ordered
+    @pagy, @events = pagy(@events)
   end
 
   def show
