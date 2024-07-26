@@ -1,0 +1,7 @@
+<nav class="sticky top-0 z-10 bg-white backdrop-filter backdrop-blur-lg bg-opacity-30 flex w-full items-center justify-center bg-white py-2 shadow-dark-mild lg:py-6 mt-8">
+  <ul class="flex items-center rounded-full bg-white/75 bg-gradient-to-r from-indigo-200/20 to-indigo-200/40 border border-white/50 px-3 text-sm font-medium text-gray-800 shadow-lg shadow-gray-800/5 ring-1 ring-gray-800/[.075] backdrop-blur-xl">
+    <%= menu_item("Events", root_path) %>
+    <%= menu_item("Documentation", documentation_path) %>
+    <%= menu_item("Log out", destroy_user_session_path, data: { turbo_method: :delete }) %>
+  </ul>
+</nav>

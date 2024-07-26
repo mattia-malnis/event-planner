@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  get "documentation", to: "documentation#index"
+
   resources :events, only: [ :show ] do
     member do
       post :toggle_subscription

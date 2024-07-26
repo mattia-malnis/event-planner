@@ -12,6 +12,7 @@
 
   <body>
     <main>
+      <%= render partial: "layouts/partials/menu" if user_signed_in? %>
       <%= yield %>
     </main>
   </body>
