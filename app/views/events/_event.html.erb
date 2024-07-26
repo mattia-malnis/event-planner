@@ -1,0 +1,6 @@
+<tr class="bg-white border-b">
+  <td class="px-4 py-2 whitespace-nowrap"><%= to_date(event.date) %></td>
+  <td class="px-4 py-2"><%= event.country %></td>
+  <td class="px-4 py-2"><%= event.title %></td>
+  <td class="px-4 py-2"><%= link_to inline_svg_tag("chevron-right.svg", class: "w-4"), event_path(event), class: "bg-gray-300 hover:bg-gray-400 hover:text-white font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2" %></td>
+</tr>

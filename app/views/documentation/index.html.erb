@@ -1,0 +1,100 @@
+<% content_for(:title) { "API documentation" } %>
+
+<div class="min-h-full w-full sm:w-10/12 lg:w-8/12 mx-auto px-4 lg:px-0 py-8 lg:py-12">
+  <h1 class="text-3xl">API documentation</h1>
+
+  <h2 class="text-2xl mt-8 mb-2">Authentication</h2>
+  <p class="mt-2">
+    For each request, it is necessary to include the provided API key in the header. The header key should be "Token".
+  </p>
+
+  <pre class="rounded-md bg-gray-300 mt-4 px-4 py-2"><code class="text-balance">curl <%= "#{request.base_url}/endpoint" %> -H 'Authorization: Token <%= current_user.api_key %>'</code></pre>
+
+  <h2 class="text-2xl mt-8 mb-2">Response codes</h2>
+  <p class="mt-2">
+    For each API call, we return a status code indicating the success or failure of the request. Below are the possible HTTP codes:
+  </p>
+  <ul class="list-disc mt-2 pl-4">
+    <li>200: the request has been processed successfully</li>
+    <li>401: the API key is not valid</li>
+    <li>404: the URL doesn't exist</li>
+    <li>422: there is a validation error</li>
+    <li>5xx: there is a server error</li>
+  </ul>
+
+  <h2 class="text-2xl mt-8 mb-2">Events listing</h2>
+  <p class="mt-2">
+    This endpoint returns the list of all events. By default, it returns only the events associated to the user. It's possible to pass the query string <code class="text-indigo-500">?all=y</code> to fetch all the events. <br>
+    Results are paginated, It's possible to change page with the query string <code class="text-indigo-500">?page=N</code>, every response has got a metadata hash with all the necessary details.
+  </p>
+
+  <pre class="rounded-md bg-gray-300 mt-4 px-4 py-2"><code class="text-balance">curl <%= api_events_url %> -H 'Authorization: Token <%= current_user.api_key %>'</code></pre>
+
+  <h2 class="text-2xl mt-8 mb-2">Event details</h2>
+  <p class="mt-2">
+    This endpoint returns the event details based on a given ID.
+  </p>
+
+  <pre class="rounded-md bg-gray-300 mt-4 px-4 py-2"><code class="text-balance">curl <%= api_events_url %>/:id -H 'Authorization: Token <%= current_user.api_key %>'</code></pre>
+
+  <h2 class="text-2xl mt-8 mb-2">Event creation</h2>
+  <p class="mt-2">
+    This endpoint permit to create an event via a POST request. Permitted params are:
+  </p>
+
+  <ul class="list-disc mt-2 pl-4">
+    <li><code class="text-indigo-500">title</code> (string): Event title;</li>
+    <li><code class="text-indigo-500">description</code> (text): Event description (optional);</li>
+    <li><code class="text-indigo-500">country</code> (string): Event country;</li>
+    <li><code class="text-indigo-500">date</code> (datetime): Event date;</li>
+    <li><code class="text-indigo-500">lat</code> (decimal): Event latitude;</li>
+    <li><code class="text-indigo-500">long</code> (decimal): Event longitude.</li>
+  </ul>
+
+  <pre class="rounded-md bg-gray-300 mt-4 px-4 py-2"><code class="text-balance">curl --location --request POST '<%= api_events_url %>' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <%= current_user.api_key %>' \
+--data '{
+"title": "Event title",
+"description": "Event description",
+"country": "Event country",
+"date": "2023-11-25 12:00",
+"lat": 78.291,
+"long": 12.32
+}'</code></pre>
+
+  <h2 class="text-2xl mt-8 mb-2">Event update</h2>
+  <p class="mt-2">
+    This endpoint permit to update an event based on a given ID via a PUT request. Permitted params are:
+  </p>
+
+  <ul class="list-disc mt-2 pl-4">
+    <li><code class="text-indigo-500">title</code> (string): Event title;</li>
+    <li><code class="text-indigo-500">description</code> (text): Event description (optional);</li>
+    <li><code class="text-indigo-500">country</code> (string): Event country;</li>
+    <li><code class="text-indigo-500">date</code> (datetime): Event date;</li>
+    <li><code class="text-indigo-500">lat</code> (decimal): Event latitude;</li>
+    <li><code class="text-indigo-500">long</code> (decimal): Event longitude.</li>
+  </ul>
+
+  <pre class="rounded-md bg-gray-300 mt-4 px-4 py-2"><code class="text-balance">curl --location --request PUT '<%= api_events_url %>/:id' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <%= current_user.api_key %>' \
+--data '{
+"title": "Event title",
+"description": "Event description",
+"country": "Event country",
+"date": "2023-11-25 12:00",
+"lat": 78.291,
+"long": 12.32
+}'</code></pre>
+
+  <h2 class="text-2xl mt-8 mb-2">Event update</h2>
+  <p class="mt-2">
+    This endpoint permit to delete an event based on a given ID via a DELETE request
+  </p>
+
+  <pre class="rounded-md bg-gray-300 mt-4 px-4 py-2"><code class="text-balance">curl --location --request DELETE '<%= api_events_url %>/:id' \
+--header 'Authorization: Token <%= current_user.api_key %>'</code></pre>
+
+</div>

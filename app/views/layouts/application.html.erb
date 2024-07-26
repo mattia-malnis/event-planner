@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>EventPlanner</title>
+    <title><%= content_for(:title) || "Event planner" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,7 +11,8 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <main>
+      <%= render partial: "layouts/partials/menu" if user_signed_in? %>
       <%= yield %>
     </main>
   </body>

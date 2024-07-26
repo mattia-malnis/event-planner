@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "load-details" do %>
+  <div class="flex items-center">
+    <%= image_tag @icon, class: "w-16" if @icon.present? %>
+    <p>
+      <%= @description if @description.present? %><br>
+      <%= temp_details(@humidity, @min, @max) %>
+    </p>
+  </div>
+<% end %>
