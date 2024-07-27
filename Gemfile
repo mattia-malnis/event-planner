@@ -74,6 +74,9 @@ group :development, :test do
 
   # Pagination gem [https://github.com/ddnexus/pagy]
   gem "pagy", "~> 9.0", ">= 9.0.2"
+
+  # Background Jobs [https://github.com/bensheldon/good_job]
+  gem "good_job", "~> 4.1"
 end
 
 group :development do
