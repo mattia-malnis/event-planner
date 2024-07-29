@@ -1,4 +1,6 @@
 class Country < ApplicationRecord
+  has_many :events
+
   validates :iso, presence: true, length: { is: 2 }
   validates :iso, uniqueness: { case_sensitive: false }, if: :iso_changed?
   validates :name, presence: true

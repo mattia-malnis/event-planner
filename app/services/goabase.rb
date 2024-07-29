@@ -7,12 +7,17 @@ class Goabase
   def events_list
     remote_list.map do |item|
       {
+        id: item["id"],
         title: item["nameParty"],
         description: event_details(item["id"]),
         country: item["nameCountry"],
-        date: item["dateStart"],
+        country_iso: item["isoCountry"],
+        city: item["nameTown"],
+        date_start: item["dateStart"],
+        date_end: item["dateEnd"],
         lat: item["geoLat"],
-        long: item["geoLon"]
+        long: item["geoLon"],
+        image: item["urlImageFull"]
       }
     end
   end

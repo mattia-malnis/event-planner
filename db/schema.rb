@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_27_081114) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_27_093534) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,12 +53,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_27_081114) do
   create_table "events", force: :cascade do |t|
     t.string "title", null: false
     t.text "description"
-    t.string "country", null: false
-    t.datetime "date", null: false
+    t.datetime "date_start", null: false
     t.decimal "lat", precision: 10, scale: 8
     t.decimal "long", precision: 11, scale: 8
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "date_end"
+    t.string "city"
+    t.string "external_ref"
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_events_on_country_id"
+    t.index ["external_ref"], name: "index_events_on_external_ref", unique: true
     t.check_constraint "lat >= '-90'::integer::numeric AND lat <= 90::numeric", name: "lat_check"
     t.check_constraint "long >= '-180'::integer::numeric AND long <= 180::numeric", name: "long_check"
   end

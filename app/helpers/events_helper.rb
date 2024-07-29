@@ -5,4 +5,11 @@ module EventsHelper
     text << "Humidity: #{humidity}%" if humidity.present?
     text.join(", ")
   end
+
+  def date(event)
+    return if event.blank?
+
+    r = [ to_datetime(event.date_start), to_datetime(event.date_end) ]
+    r.compact_blank.join (" - ")
+  end
 end

@@ -77,6 +77,12 @@ group :development, :test do
 
   # Background Jobs [https://github.com/bensheldon/good_job]
   gem "good_job", "~> 4.1"
+
+  # Rails N+1 queries auto-detection [https://github.com/charkost/prosopite]
+  gem "prosopite", "~> 1.4", ">= 1.4.2"
+
+  # Ruby extension to parse, deparse and normalize SQL queries using the PostgreSQL query parser [https://github.com/pganalyze/pg_query]
+  gem "pg_query", "~> 5.1"
 end
 
 group :development do

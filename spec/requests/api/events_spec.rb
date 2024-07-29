@@ -2,7 +2,8 @@ require "rails_helper"
 
 RSpec.describe "Api::Events", type: :request do
   let(:user) { FactoryBot.create :user }
-  let!(:events) { FactoryBot.create_list(:event, 5) }
+  let(:country) { FactoryBot.create :country }
+  let!(:events) { FactoryBot.create_list(:event, 5, country:) }
 
   def auth_headers(user)
     { "Authorization" => "Bearer #{user.api_key}" }
@@ -29,7 +30,7 @@ RSpec.describe "Api::Events", type: :request do
 
     it "fetch user events list" do
       # Assign some events to user
-      events[0..2].each { |event| user.toggle_event!(event) }
+      events[0..2].each { |event| user.events << event }
 
       get api_events_path, headers: auth_headers(user), as: :json
 
@@ -47,10 +48,15 @@ RSpec.describe "Api::Events", type: :request do
     it "create a new event" do
       event_params = {
         title: FFaker::Lorem.phrase,
-        country: FFaker::Address.country,
-        date: FFaker::Date.forward,
+        date_start: FFaker::Date.backward,
+        date_end: FFaker::Date.forward,
+        city: FFaker::Address.city,
         lat: 78.291,
-        long: 12.32
+        long: 12.32,
+        country: {
+          iso: FFaker::Address.country_code,
+          name: FFaker::Address.country
+        }
       }
       post api_events_path, params: event_params, headers: auth_headers(user), as: :json
 
@@ -60,7 +66,7 @@ RSpec.describe "Api::Events", type: :request do
       # Parse the response JSON and check if contains all the necessary keys
       response_json = JSON.parse(response.body)
       expect(response_json).to have_key("data")
-      expect(response_json["data"].keys).to include("id", "title", "description", "country", "date", "lat", "long")
+      expect(response_json["data"].keys).to include("id", "title", "description", "date_start", "date_end", "city", "lat", "long", "country")
     end
 
     it "raise validation error" do
@@ -86,7 +92,7 @@ RSpec.describe "Api::Events", type: :request do
       # Parse the response JSON and check if contains all the necessary keys
       response_json = JSON.parse(response.body)
       expect(response_json).to have_key("data")
-      expect(response_json["data"].keys).to include("id", "title", "description", "country", "date", "lat", "long")
+      expect(response_json["data"].keys).to include("id", "title", "description", "date_start", "date_end", "city", "lat", "long", "country")
 
       # Reload the event and check if the title has been updated
       event.reload
@@ -105,7 +111,7 @@ RSpec.describe "Api::Events", type: :request do
       # Parse the response JSON and check if contains all the necessary keys
       response_json = JSON.parse(response.body)
       expect(response_json).to have_key("data")
-      expect(response_json["data"].keys).to include("id", "title", "description", "country", "date", "lat", "long")
+      expect(response_json["data"].keys).to include("id", "title", "description", "date_start", "date_end", "city", "lat", "long", "country")
 
       # Ensure the event is deleted from the database
       expect(Event.exists?(event.id)).to be false

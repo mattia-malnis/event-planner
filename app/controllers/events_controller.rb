@@ -8,6 +8,7 @@ class EventsController < ApplicationController
     # If we have the query string `all=y`, we show all the events; otherwise, only the events associated with the user
     @show_all = params[:all] == "y"
     @events = @show_all ? Event.all.ordered : current_user.events.ordered
+    @events = @events.eager_load(:country)
     @pagy, @events = pagy(@events)
   end
 
@@ -21,7 +22,7 @@ class EventsController < ApplicationController
 
   def weather
     o = OpenWeather.new
-    result = o.get_forecast(@event.date, @event.lat, @event.long)
+    result = o.get_forecast(@event.date_start, @event.lat, @event.long)
 
     # No forecast found
     render plain: "" unless result.dig(:success)

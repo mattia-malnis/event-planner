@@ -1,6 +1,10 @@
 require "rails_helper"
 
 RSpec.describe Country, type: :model do
+  context "associations" do
+    it { should have_many(:events) }
+  end
+
   context "validations" do
     it "is valid with valid attributes" do
       expect(Country.new(iso: "it", name: "Italy")).to be_valid

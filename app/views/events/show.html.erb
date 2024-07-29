@@ -5,10 +5,10 @@
 
   <p class="mt-4 mb-6 flex items-center gap-x-6">
     <span class="flex items-center">
-      <%= inline_svg_tag("map-pin.svg", class: "w-5 mr-1") %> <%= @event.country %>
+      <%= inline_svg_tag("map-pin.svg", class: "w-5 mr-1") %> <%= @event.city %>, <%= @event.country_name %>
     </span>
     <span class="flex items-center">
-      <%= inline_svg_tag("calendar.svg", class: "w-5 mr-1") %> <%= to_datetime(@event.date) %>
+      <%= inline_svg_tag("calendar.svg", class: "w-5 mr-1") %> <%= date(@event) %>
     </span>
   </p>
   <%= turbo_frame_tag "load-details", src: weather_event_path(@event) %>

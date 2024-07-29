@@ -21,7 +21,7 @@ module ApplicationHelper
   def to_datetime(date)
     return if date.blank?
 
-    date.strftime("%b %d, %Y - %H:%M")
+    date.strftime("%a, %d %b %Y, %H:%M")
   end
 
   def menu_item(name, path, link_options = {})

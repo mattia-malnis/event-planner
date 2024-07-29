@@ -14,7 +14,7 @@ class Api::EventsController < ApiController
       @current_user.events.ordered
     end
 
-    @total_items = @events.count
+    @events = @events.eager_load(:country)
     @pagy, @events = pagy(@events)
     @pagination = pagy_metadata(@pagy)
   end
@@ -22,14 +22,18 @@ class Api::EventsController < ApiController
   # POST /api/events
   # Creates a new event based on the provided parameters
   def create
-    @event = Event.create!(event_params)
+    @event = Event.new(event_params.except(:country))
+    @event.country = find_or_create_country(event_params[:country]) if event_params[:country].present?
+    @event.save!
     render "show"
   end
 
   # PUT /api/events/:id
   # Updates the specified event based on the provided parameters.
   def update
-    @event.update!(event_params)
+    @event.assign_attributes(event_params.except(:country))
+    @event.country = find_or_create_country(event_params[:country]) if event_params[:country].present?
+    @event.save!
     render "show"
   end
 
@@ -43,8 +47,7 @@ class Api::EventsController < ApiController
   private
 
   def event_params
-    permitted_params = [ :title, :description, :country, :date, :lat, :long ]
-    permitted_params << :id if action_name == "update"
+    permitted_params = [ :title, :description, :date_start, :date_end, :lat, :long, :city, country: [ :iso, :name ] ]
     params.permit(permitted_params)
   end
 
@@ -53,6 +56,15 @@ class Api::EventsController < ApiController
     @event = Event.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render json: { message: "Record #{params[:id]} not found" }, status: :not_found
+  end
+
+  # Finds or creates the country based on the ISO code
+  def find_or_create_country(country_params)
+    return unless country_params.present?
+
+    Country.find_or_create_by!(iso: country_params[:iso]) do |country|
+      country.name = country_params[:name]
+    end
   end
 
   def handle_record_invalid(instance)
