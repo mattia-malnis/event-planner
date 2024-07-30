@@ -15,8 +15,9 @@
 After installing Ruby and PostgreSQL, follow these steps:
 
 1. Run `bundle install` to install all necessary Gems;
-2. Run `bin/setup` to prepare the database and import some events from [www.goabase.net](https://www.goabase.net/api/party);
-3. Execute `bin/dev` to run the app locally.
+2. Run `bin/setup` to prepare the database;
+3. Run `rake utility:import_events` to import some events from [www.goabase.net](https://www.goabase.net/api/party);
+4. Execute `bin/dev` to run the app locally.
 
 ### Using OpenWeather
 

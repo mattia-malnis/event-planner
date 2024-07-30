@@ -1,14 +1,17 @@
 namespace :utility do
-  desc "Get a list of events from goabase.net"
-  task create_events: :environment do
-    begin
-      g = Goabase.new
-      events_list = g.events_list
-      Event.upsert_all(events_list) if events_list.any?
+  desc "Import events from goabase.net"
+  task import_events: :environment do
+    Rails.logger = Logger.new(STDOUT)
+    Rails.logger.level = Logger::INFO
 
-    rescue StandardError => e
-      Rails.logger.error("Failed to create events: #{e.message}")
-      raise e
-    end
+    Rails.logger.info("Starting event import from goabase.net")
+
+    EventImporter.new.import
+
+    Rails.logger.info("Event import completed successfully")
+  rescue StandardError => e
+    Rails.logger.error("Failed to import events: #{e.message}")
+    Rails.logger.error(e.backtrace.join("\n"))
+    raise e
   end
 end

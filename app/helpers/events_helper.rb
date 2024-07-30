@@ -5,4 +5,18 @@ module EventsHelper
     text << "Humidity: #{humidity}%" if humidity.present?
     text.join(", ")
   end
+
+  def date(event)
+    return if event.blank?
+
+    r = [ to_datetime(event.date_start), to_datetime(event.date_end) ]
+    r.compact_blank.join ("<br>")
+  end
+
+  def subscribed_mark(event)
+    return if event.blank?
+    return unless current_user.signed_up_for_event?(event)
+
+    inline_svg_tag("check-circle.svg", class: "size-6 absolute text-white drop-shadow-md right-2.5 top-2.5")
+  end
 end

@@ -36,7 +36,7 @@ gem "tzinfo-data", platforms: %i[windows jruby]
 gem "bootsnap", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 
 # Use Redis for Action Cable
 gem "redis", "~> 4.0"
@@ -74,6 +74,15 @@ group :development, :test do
 
   # Pagination gem [https://github.com/ddnexus/pagy]
   gem "pagy", "~> 9.0", ">= 9.0.2"
+
+  # Background Jobs [https://github.com/bensheldon/good_job]
+  gem "good_job", "~> 4.1"
+
+  # Rails N+1 queries auto-detection [https://github.com/charkost/prosopite]
+  gem "prosopite", "~> 1.4", ">= 1.4.2"
+
+  # Ruby extension to parse, deparse and normalize SQL queries using the PostgreSQL query parser [https://github.com/pganalyze/pg_query]
+  gem "pg_query", "~> 5.1"
 end
 
 group :development do

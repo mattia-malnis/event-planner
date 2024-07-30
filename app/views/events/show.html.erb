@@ -1,16 +1,17 @@
 <% content_for(:title) { @event.title } %>
 
-<div class="min-h-full w-full sm:w-10/12 lg:w-8/12 mx-auto px-4 lg:px-0 py-8 lg:py-12">
+<div class="min-h-full w-full sm:w-11/12 xl:w-8/12 mx-auto px-4 lg:px-0 py-8 lg:py-12">
   <%= render partial: "title" %>
 
-  <p class="mt-4 mb-6 flex items-center gap-x-6">
-    <span class="flex items-center">
-      <%= inline_svg_tag("map-pin.svg", class: "w-5 mr-1") %> <%= @event.country %>
-    </span>
-    <span class="flex items-center">
-      <%= inline_svg_tag("calendar.svg", class: "w-5 mr-1") %> <%= to_datetime(@event.date) %>
-    </span>
-  </p>
-  <%= turbo_frame_tag "load-details", src: weather_event_path(@event) %>
+  <div class="mt-6 mb-8 lg:flex items-center gap-x-8">
+    <div class="flex items-center leading-tight">
+      <%= inline_svg_tag("map-pin.svg", class: "w-10 mr-2") %> <%= @event.city %>, <br><%= @event.country.name %>
+    </div>
+    <div class="flex items-center leading-tight my-4 lg:my-0">
+      <%= inline_svg_tag("calendar.svg", class: "w-10 mr-2") %> <%= date(@event).html_safe %>
+    </div>
+    <%= turbo_frame_tag "load-details", src: weather_event_path(@event) %>
+  </div>
+  <%= image_tag @event.image.variant(:medium), class: "mx-auto mb-5 max-w-full lg:float-right lg:ml-5" if @event.image.attached? %>
   <p class="mt-4 mb-6 whitespace-break-spaces"><%= @event.description %></p>
 </div>

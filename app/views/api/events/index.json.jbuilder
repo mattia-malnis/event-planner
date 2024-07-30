@@ -1,6 +1,9 @@
 json.data do
   json.array! @events do |event|
-    json.extract! event, :id, :title, :country, :date, :lat, :long
+    json.extract! event, :id, :title, :description, :date_start, :date_end, :lat, :long, :city
+    json.country do
+      json.extract! event.country, :iso, :name
+    end
   end
 end
 

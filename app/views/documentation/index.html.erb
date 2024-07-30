@@ -1,6 +1,6 @@
 <% content_for(:title) { "API documentation" } %>
 
-<div class="min-h-full w-full sm:w-10/12 lg:w-8/12 mx-auto px-4 lg:px-0 py-8 lg:py-12">
+<div class="min-h-full w-full sm:w-11/12 xl:w-8/12 mx-auto px-4 lg:px-0 py-8 lg:py-12">
   <h1 class="text-3xl">API documentation</h1>
 
   <h2 class="text-2xl mt-8 mb-2">Authentication</h2>
@@ -45,10 +45,15 @@
   <ul class="list-disc mt-2 pl-4">
     <li><code class="text-indigo-500">title</code> (string): Event title;</li>
     <li><code class="text-indigo-500">description</code> (text): Event description (optional);</li>
-    <li><code class="text-indigo-500">country</code> (string): Event country;</li>
-    <li><code class="text-indigo-500">date</code> (datetime): Event date;</li>
+    <li><code class="text-indigo-500">date_start</code> (datetime): Event start date;</li>
+    <li><code class="text-indigo-500">date_end</code> (datetime): Event end date (optional);</li>
     <li><code class="text-indigo-500">lat</code> (decimal): Event latitude;</li>
-    <li><code class="text-indigo-500">long</code> (decimal): Event longitude.</li>
+    <li><code class="text-indigo-500">long</code> (decimal): Event longitude;</li>
+    <li><code class="text-indigo-500">image_url</code> (string): Remote URL of event image (optional);</li>
+    <li><code class="text-indigo-500">city</code> (string): Event city;</li>
+    <li><code class="text-indigo-500">country</code> (json): Event country;</li>
+    <li><code class="text-indigo-500">country[:iso]</code> (string): Country ISO code;</li>
+    <li><code class="text-indigo-500">country[:name]</code> (string): Country name.</li>
   </ul>
 
   <pre class="rounded-md bg-gray-300 mt-4 px-4 py-2"><code class="text-balance">curl --location --request POST '<%= api_events_url %>' \
@@ -58,9 +63,15 @@
 "title": "Event title",
 "description": "Event description",
 "country": "Event country",
-"date": "2023-11-25 12:00",
-"lat": 78.291,
-"long": 12.32
+"date_start": "2024-07-12 12:00",
+"date_end": "2024-07-14 18:00",
+"lat": 41.902782,
+"long": 12.496365,
+"city": "Rome",
+"country": {
+  "iso": "it",
+  "name": "Italy"
+}
 }'</code></pre>
 
   <h2 class="text-2xl mt-8 mb-2">Event update</h2>
@@ -71,10 +82,15 @@
   <ul class="list-disc mt-2 pl-4">
     <li><code class="text-indigo-500">title</code> (string): Event title;</li>
     <li><code class="text-indigo-500">description</code> (text): Event description (optional);</li>
-    <li><code class="text-indigo-500">country</code> (string): Event country;</li>
-    <li><code class="text-indigo-500">date</code> (datetime): Event date;</li>
+    <li><code class="text-indigo-500">date_start</code> (datetime): Event start date;</li>
+    <li><code class="text-indigo-500">date_end</code> (datetime): Event end date (optional);</li>
     <li><code class="text-indigo-500">lat</code> (decimal): Event latitude;</li>
-    <li><code class="text-indigo-500">long</code> (decimal): Event longitude.</li>
+    <li><code class="text-indigo-500">long</code> (decimal): Event longitude;</li>
+    <li><code class="text-indigo-500">image_url</code> (string): Remote URL of event image (optional);</li>
+    <li><code class="text-indigo-500">city</code> (string): Event city;</li>
+    <li><code class="text-indigo-500">country</code> (json): Event country;</li>
+    <li><code class="text-indigo-500">country[:iso]</code> (string): Country ISO code;</li>
+    <li><code class="text-indigo-500">country[:name]</code> (string): Country name.</li>
   </ul>
 
   <pre class="rounded-md bg-gray-300 mt-4 px-4 py-2"><code class="text-balance">curl --location --request PUT '<%= api_events_url %>/:id' \
@@ -84,12 +100,17 @@
 "title": "Event title",
 "description": "Event description",
 "country": "Event country",
-"date": "2023-11-25 12:00",
-"lat": 78.291,
-"long": 12.32
+"date_start": "2024-07-12 12:00",
+"date_end": "2024-07-14 18:00",
+"lat": 41.902782,
+"long": 12.496365,
+"city": "Rome",
+"country": {
+  "iso": "it",
+  "name": "Italy"
 }'</code></pre>
 
-  <h2 class="text-2xl mt-8 mb-2">Event update</h2>
+  <h2 class="text-2xl mt-8 mb-2">Event delete</h2>
   <p class="mt-2">
     This endpoint permit to delete an event based on a given ID via a DELETE request
   </p>
