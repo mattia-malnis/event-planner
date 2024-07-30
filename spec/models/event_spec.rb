@@ -79,9 +79,9 @@ RSpec.describe Event, type: :model do
 
   describe ".ordered" do
     it "returns events ordered by date" do
-      event1 = FactoryBot.create(:event, date_start: 1.day.from_now)
-      event2 = FactoryBot.create(:event, date_start: 2.days.from_now)
-      event3 = FactoryBot.create(:event, date_start: 3.days.from_now)
+      event1 = FactoryBot.create(:event, date_start: 1.day.from_now, date_end: 2.day.from_now)
+      event2 = FactoryBot.create(:event, date_start: 2.days.from_now, date_end: 3.days.from_now)
+      event3 = FactoryBot.create(:event, date_start: 3.days.from_now, date_end: 4.days.from_now)
 
       expect(Event.ordered).to eq([ event1, event2, event3 ])
     end

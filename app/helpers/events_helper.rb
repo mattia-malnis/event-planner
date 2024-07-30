@@ -10,6 +10,6 @@ module EventsHelper
     return if event.blank?
 
     r = [ to_datetime(event.date_start), to_datetime(event.date_end) ]
-    r.compact_blank.join (" - ")
+    r.compact_blank.join ("<br>")
   end
 end

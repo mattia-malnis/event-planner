@@ -66,7 +66,7 @@ RSpec.describe "Api::Events", type: :request do
       # Parse the response JSON and check if contains all the necessary keys
       response_json = JSON.parse(response.body)
       expect(response_json).to have_key("data")
-      expect(response_json["data"].keys).to include("id", "title", "description", "date_start", "date_end", "city", "lat", "long", "country")
+      expect(response_json["data"].keys).to include("id", "title", "description", "date_start", "date_end", "city", "lat", "long", "country", "image_url")
     end
 
     it "raise validation error" do
@@ -92,7 +92,7 @@ RSpec.describe "Api::Events", type: :request do
       # Parse the response JSON and check if contains all the necessary keys
       response_json = JSON.parse(response.body)
       expect(response_json).to have_key("data")
-      expect(response_json["data"].keys).to include("id", "title", "description", "date_start", "date_end", "city", "lat", "long", "country")
+      expect(response_json["data"].keys).to include("id", "title", "description", "date_start", "date_end", "city", "lat", "long", "country", "image_url")
 
       # Reload the event and check if the title has been updated
       event.reload

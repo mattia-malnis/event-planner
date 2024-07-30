@@ -22,18 +22,22 @@ class Api::EventsController < ApiController
   # POST /api/events
   # Creates a new event based on the provided parameters
   def create
-    @event = Event.new(event_params.except(:country))
+    @event = Event.new(event_params.except(:country, :image_url))
+    @event.temp_image_url = event_params[:image_url] if event_params[:image_url].present?
     @event.country = find_or_create_country(event_params[:country]) if event_params[:country].present?
     @event.save!
+    EventImageProcessingJob.perform_later(@event.id) if @event.temp_image_url.present?
     render "show"
   end
 
   # PUT /api/events/:id
   # Updates the specified event based on the provided parameters.
   def update
-    @event.assign_attributes(event_params.except(:country))
+    @event.assign_attributes(event_params.except(:country, :image_url))
+    @event.temp_image_url = event_params[:image_url] if event_params[:image_url].present?
     @event.country = find_or_create_country(event_params[:country]) if event_params[:country].present?
     @event.save!
+    EventImageProcessingJob.perform_later(@event.id) if @event.temp_image_url.present?
     render "show"
   end
 
@@ -47,7 +51,7 @@ class Api::EventsController < ApiController
   private
 
   def event_params
-    permitted_params = [ :title, :description, :date_start, :date_end, :lat, :long, :city, country: [ :iso, :name ] ]
+    permitted_params = [ :title, :description, :date_start, :date_end, :lat, :long, :image_url, :city, country: [ :iso, :name ] ]
     params.permit(permitted_params)
   end
 

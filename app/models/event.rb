@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
+  include ImageUploadable
+
   has_and_belongs_to_many :users
   belongs_to :country
 

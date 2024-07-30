@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_27_093534) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_29_193713) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_27_093534) do
     t.string "city"
     t.string "external_ref"
     t.bigint "country_id"
+    t.string "temp_image_url"
     t.index ["country_id"], name: "index_events_on_country_id"
     t.index ["external_ref"], name: "index_events_on_external_ref", unique: true
     t.check_constraint "lat >= '-90'::integer::numeric AND lat <= 90::numeric", name: "lat_check"
