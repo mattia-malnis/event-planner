@@ -3,12 +3,12 @@ class EventsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :find_event, only: [ :show, :toggle_subscription, :weather ]
+  after_action :accessed_fields, only: :index
 
   def index
     # If we have the query string `all=y`, we show all the events; otherwise, only the events associated with the user
     @show_all = params[:all] == "y"
-    @events = @show_all ? Event.all.ordered : current_user.events.ordered
-    @events = @events.eager_load(:country)
+    @events = @show_all ? Event.all.ordered_with_country : current_user.events.ordered_with_country
     @pagy, @events = pagy(@events)
   end
 
@@ -41,5 +41,13 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render file: Rails.root.join("public", "404.html"), status: :not_found, layout: false
+  end
+
+  def accessed_fields
+    # usefull to optimize queries and select only necessary attrs
+    return if Rails.env.production?
+
+    puts ">>> list of accessed fields:"
+    puts @events.first.accessed_fields
   end
 end

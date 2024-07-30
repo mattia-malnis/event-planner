@@ -1,6 +1,22 @@
-<tr class="bg-white border-b">
-  <td class="px-4 py-2 whitespace-nowrap"><%= to_date(event.date_start) %></td>
-  <td class="px-4 py-2"><%= event.country_name %></td>
-  <td class="px-4 py-2"><%= event.title %></td>
-  <td class="px-4 py-2"><%= link_to inline_svg_tag("chevron-right.svg", class: "w-4"), event_path(event), class: "bg-gray-300 hover:bg-gray-400 hover:text-white font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2" %></td>
-</tr>
+<div class="rounded shadow-lg shadow-gray-200 bg-white duration-300 hover:-translate-y-1">
+  <%= link_to event_path(event), class: "cursor-pointer" do %>
+    <div class="relative overflow-hidden rounded-t h-72 w-full">
+      <div
+        class="absolute inset-0 bg-gray-200 bg-cover bg-center blur-md scale-110"
+        <% if event.image.attached? %> style="background-image: url('<%= url_for(event.image.variant(:small)) %>');"<% end %>>
+      </div>
+      <div class="relative z-1 h-full">
+        <%= subscribed_mark(event) if @show_all %>
+        <%= image_tag event.image.variant(:small), class: "rounded-t h-full w-full object-contain" if event.image.attached? %>
+      </div>
+    </div>
+
+    <div class="py-8 px-6">
+      <h3 class="text-xl mb-4 leading-6"><%= event.title %></h3>
+      <p class="text-gray-500 leading-5 text-sm">
+        <%= to_date(event.date_start) %> <br>
+        <%= event.city %>, <%= event.country_name %>
+      </p>
+    </div>
+  <% end %>
+</div>

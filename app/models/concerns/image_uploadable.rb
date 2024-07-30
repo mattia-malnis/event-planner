@@ -4,9 +4,11 @@ module ImageUploadable
   extend ActiveSupport::Concern
 
   included do
-    has_one_attached :image
+    has_one_attached :image do |attachable|
+      attachable.variant :small, resize_to_limit: [ 300, 300 ]
+      attachable.variant :medium, resize_to_limit: [ 340, 430 ]
+    end
   end
-
 
   def attach_image_from_url
     return if temp_image_url.blank?

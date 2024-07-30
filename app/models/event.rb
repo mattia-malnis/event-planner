@@ -14,8 +14,11 @@ class Event < ApplicationRecord
     order(:date_start)
   end
 
-  def country_name
-    country.name
+  def self.ordered_with_country
+    select("events.id, events.title, events.date_start, events.city, events.country_id, countries.name AS country_name")
+    .with_attached_image
+    .eager_load(:country)
+    .ordered
   end
 
   private
