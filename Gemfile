@@ -9,7 +9,7 @@ gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 gem "propshaft"
 
 # Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
+gem "pg", "~> 1.5"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
@@ -36,10 +36,10 @@ gem "tzinfo-data", platforms: %i[windows jruby]
 gem "bootsnap", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.13"
 
 # Use Redis for Action Cable
-gem "redis", "~> 4.0"
+gem "redis", "~> 5.2"
 
 # Flexible authentication solution for Rails with Warden [https://github.com/heartcombo/devise]
 gem "devise", "~> 4.9", ">= 4.9.4"
@@ -73,7 +73,7 @@ group :development, :test do
   gem "dotenv-rails", "~> 3.1", ">= 3.1.2"
 
   # Pagination gem [https://github.com/ddnexus/pagy]
-  gem "pagy", "~> 9.0", ">= 9.0.2"
+  gem "pagy", "~> 9.0"
 
   # Background Jobs [https://github.com/bensheldon/good_job]
   gem "good_job", "~> 4.1"
