@@ -46,6 +46,7 @@ class EventsController < ApplicationController
   def accessed_fields
     # usefull to optimize queries and select only necessary attrs
     return if Rails.env.production?
+    return if @events.blank?
 
     puts ">>> list of accessed fields:"
     puts @events.first.accessed_fields
