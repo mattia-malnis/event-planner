@@ -101,6 +101,11 @@ jobs:
           bin/rails db:create
           bin/rails db:schema:load
 
+      - name: Precompile assets
+        run: bundle exec rails assets:precompile
+        env:
+          RAILS_ENV: test
+
       - name: Run RSpec tests
         run: bundle exec rspec
 
