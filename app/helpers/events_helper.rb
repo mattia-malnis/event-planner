@@ -10,7 +10,7 @@ module EventsHelper
     return if event.blank?
 
     r = [ to_datetime(event.date_start), to_datetime(event.date_end) ]
-    r.compact_blank.join ("<br>")
+    safe_join(r.compact_blank, tag.br)
   end
 
   def subscribed_mark(event)
