@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get "documentation", to: "documentation#index"
 
   resources :events, only: [ :show ] do
+    get "subscribed", on: :collection
+
     member do
       post :toggle_subscription
       get :weather

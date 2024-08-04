@@ -1,9 +1,9 @@
-<% content_for(:title) { "Events" } %>
+<% content_for(:title) { "Subscribed events" } %>
 
 <div class="min-h-full w-full sm:w-11/12 xl:w-8/12 mx-auto px-4 lg:px-0 py-8 lg:py-12">
   <% if @events.present? %>
-    <%= render partial: "all_events_listing" %>
+    <%= render partial: "user_events_listing" %>
   <% else %>
-    <%= render partial: "no_events" %>
+    <%= render partial: "no_user_events" %>
   <% end %>
 </div>
