@@ -8,7 +8,22 @@ class EventsController < ApplicationController
   def index
     # If we have the query string `all=y`, we show all the events; otherwise, only the events associated with the user
     @show_all = params[:all] == "y"
-    @events = @show_all ? Event.all.ordered_with_country : current_user.events.ordered_with_country
+
+    if @show_all
+      case params[:filter]
+      when "all"
+        @events = Event.all
+      when "past"
+        @events = Event.past
+      else
+        @events = Event.upcoming
+      end
+    else
+      @events = current_user.events
+    end
+
+    @events = @events.ordered_with_country
+
     @pagy, @events = pagy(@events)
   end
 
