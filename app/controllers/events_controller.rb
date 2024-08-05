@@ -3,6 +3,7 @@ class EventsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :find_event, only: [ :show, :toggle_subscription, :weather ]
+  before_action :store_location, only: [ :index, :subscribed ]
   after_action :accessed_fields, only: [ :index, :subscribed ]
 
   def index
@@ -38,6 +39,10 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def store_location
+    session[:return_to] = request.fullpath
+  end
 
   def filter_and_paginate_events
     @events = case params[:filter]

@@ -24,6 +24,10 @@ module ApplicationHelper
     date.strftime("%a, %d %b %Y, %H:%M")
   end
 
+  def back_or_default(default)
+    session[:return_to] || default
+  end
+
   def menu_item(name, path, controllers = [], actions = [], link_options = {})
     link_class = active_menu?(controllers, actions) ? "text-indigo-600" : ""
 
