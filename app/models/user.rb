@@ -17,6 +17,8 @@ class User < ApplicationRecord
   # Toggles the user's subscription status for an event.
   # If the user is already signed up, it removes the subscription; otherwise, it adds a new subscription.
   def toggle_event!(event)
+    return unless event.open_for_registration?
+
     signed_up_for_event?(event) ? events.delete(event) : events << event
   end
 end

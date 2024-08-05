@@ -19,4 +19,14 @@ module EventsHelper
 
     inline_svg_tag("check-circle.svg", class: "size-6 absolute text-white drop-shadow-md right-2.5 top-2.5")
   end
+
+  def action_button(event)
+    return unless event.open_for_registration?
+
+    if current_user.signed_up_for_event?(event)
+      button_to "Cancel registration", toggle_subscription_event_path(event), class: "py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700"
+    else
+      button_to "Sign Up Now", toggle_subscription_event_path(event), class: "py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+    end
+  end
 end
