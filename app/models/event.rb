@@ -10,9 +10,9 @@ class Event < ApplicationRecord
   validates :long, numericality: { in: -180..180 }
   validate :end_date_after_start_date, if: -> { date_end.present? }
 
-  def self.ordered
-    order(:date_start)
-  end
+  scope :upcoming, -> { where("date_start >= ?", Time.current) }
+  scope :past, -> { where("date_start < ?", Time.current) }
+  scope :ordered, -> { order(date_start: :asc) }
 
   def self.ordered_with_country
     select("events.id, events.title, events.date_start, events.city, events.country_id, countries.name AS country_name")

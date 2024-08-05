@@ -24,8 +24,13 @@ module ApplicationHelper
     date.strftime("%a, %d %b %Y, %H:%M")
   end
 
-  def menu_item(name, path, link_options = {})
-    link_class = controller_matches?(path) ? "text-indigo-600" : ""
+  def back_or_default(default)
+    session[:return_to] || default
+  end
+
+  def menu_item(name, path, controllers = [], actions = [], link_options = {})
+    link_class = active_menu?(controllers, actions) ? "text-indigo-600" : ""
+
     content_tag(:li) do
       link_to path, link_options.merge(class: [ "flex-none group relative block transition duration-300 px-3 py-2.5 hover:text-indigo-600", link_class ]) do
         safe_join([
@@ -39,16 +44,12 @@ module ApplicationHelper
     end
   end
 
-  def controller_and_action_for_path(path)
-    # The route "destroy_user_session | DELETE /users/sign_out(.:format) | devise/sessions#destroy"
-    # is not recognized but is not a problem because we don't need it on the menu
-    Rails.application.routes.recognize_path(path)
-  rescue ActionController::RoutingError
-    {}
-  end
+  private
 
-  def controller_matches?(path)
-    recognized = controller_and_action_for_path(path)
-    recognized[:controller] == controller_name
+  def active_menu?(controllers = [], actions = [])
+    return false if controllers.empty? && actions.empty?
+    return controllers.include?(controller_name) if actions.empty?
+
+    controllers.include?(controller_name) && actions.include?(action_name)
   end
 end

@@ -1,5 +1,7 @@
 <h1 class="text-3xl">Your upcoming events</h1>
 <p class="mt-2 mb-12">
-  Here's a snapshot of the amazing events you've chosen. Each one is a doorway to new memories and connections. Ready for more? <%= link_to "Explore all events", root_path(all: "y"), class: "underline" %>
+  Here's a snapshot of the amazing events you've chosen. Each one is a doorway to new memories and connections. Ready for more? <%= link_to "Explore all events", root_path, class: "underline" %>
 </p>
+
+<%= render partial: "filters" %>
 <%= render partial: "events" %>

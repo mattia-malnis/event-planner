@@ -77,13 +77,35 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe ".ordered" do
-    it "returns events ordered by date" do
-      event1 = FactoryBot.create(:event, date_start: 1.day.from_now, date_end: 2.day.from_now)
-      event2 = FactoryBot.create(:event, date_start: 2.days.from_now, date_end: 3.days.from_now)
-      event3 = FactoryBot.create(:event, date_start: 3.days.from_now, date_end: 4.days.from_now)
+  describe "scopes" do
+    let!(:past_event) { FactoryBot.create(:event, date_start: 1.day.ago) }
+    let!(:future_event) { FactoryBot.create(:event, date_start: 1.day.from_now) }
+    let!(:another_future_event) { FactoryBot.create(:event, date_start: 2.days.from_now) }
 
-      expect(Event.ordered).to eq([ event1, event2, event3 ])
+    describe ".upcoming" do
+      it "returns events with start date in the future" do
+        expect(Event.upcoming).to contain_exactly(future_event, another_future_event)
+      end
+
+      it "does not return events with start date in the past" do
+        expect(Event.upcoming).not_to include(past_event)
+      end
+    end
+
+    describe ".past" do
+      it "returns events with start date in the past" do
+        expect(Event.past).to contain_exactly(past_event)
+      end
+
+      it "does not return events with start date in the future" do
+        expect(Event.past).not_to include(future_event, another_future_event)
+      end
+    end
+
+    describe ".ordered" do
+      it "returns events ordered by date" do
+        expect(Event.ordered).to eq([ past_event, future_event, another_future_event ])
+      end
     end
   end
 end

@@ -3,13 +3,17 @@ class EventsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :find_event, only: [ :show, :toggle_subscription, :weather ]
-  after_action :accessed_fields, only: :index
+  before_action :store_location, only: [ :index, :subscribed ]
+  after_action :accessed_fields, only: [ :index, :subscribed ]
 
   def index
-    # If we have the query string `all=y`, we show all the events; otherwise, only the events associated with the user
-    @show_all = params[:all] == "y"
-    @events = @show_all ? Event.all.ordered_with_country : current_user.events.ordered_with_country
-    @pagy, @events = pagy(@events)
+    @events = Event.all
+    filter_and_paginate_events
+  end
+
+  def subscribed
+    @events = current_user.events
+    filter_and_paginate_events
   end
 
   def show
@@ -36,6 +40,24 @@ class EventsController < ApplicationController
 
   private
 
+  def store_location
+    session[:return_to] = request.fullpath
+  end
+
+  def filter_and_paginate_events
+    @events = case params[:filter]
+    when "all"
+      @events
+    when "past"
+      @events.past
+    else
+      @events.upcoming
+    end
+
+    @events = @events.ordered_with_country
+    @pagy, @events = pagy(@events)
+  end
+
   # Finds the event by ID or renders a 404 page if not found
   def find_event
     @event = Event.find(params[:id])
@@ -45,10 +67,8 @@ class EventsController < ApplicationController
 
   def accessed_fields
     # usefull to optimize queries and select only necessary attrs
-    return if Rails.env.production?
-    return if @events.blank?
+    return if Rails.env.production? || @events.blank?
 
-    puts ">>> list of accessed fields:"
-    puts @events.first.accessed_fields
+    Rails.logger.debug ">>> List of accessed fields: #{@events.first.accessed_fields.join(", ")}"
   end
 end

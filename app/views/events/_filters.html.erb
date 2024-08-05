@@ -1,0 +1,5 @@
+<div class="my-5">
+  <%= form_with url: request.path, method: :get, class: "max-w-sm", data: { turbo_frame: "listing", turbo_action: "advance", controller: "autosubmit" } do %>
+    <%= select_tag :filter, options_for_select([["Upcoming events", "upcoming"], ["All events", "all"], ["Past events", "past"]], params[:filter]), { class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5", autocomplete: "off", data: { action: "autosubmit#onSelectChange" } } %>
+  <% end %>
+</div>

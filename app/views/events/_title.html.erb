@@ -1,5 +1,5 @@
 <div id="event-title" class="flex items-center justify-center gap-x-4">
-  <%= link_to inline_svg_tag("chevron-left.svg", class: "w-4"), root_path(all: "y"), class: "bg-gray-300 hover:bg-gray-400 hover:text-white font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center" %>
+  <%= link_to inline_svg_tag("chevron-left.svg", class: "size-7"), back_or_default(root_path) %>
   <h1 class="text-3xl flex-1 whitespace-nowrap text-ellipsis overflow-hidden"><%= @event.title %></h1>
   <%= button_to "Sign Up Now", toggle_subscription_event_path(@event), class: "py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700" unless current_user.signed_up_for_event?(@event) %>
   <%= button_to "Cancel registration", toggle_subscription_event_path(@event), class: "py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700" if current_user.signed_up_for_event?(@event) %>
