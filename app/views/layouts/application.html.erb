@@ -15,5 +15,6 @@
       <%= render partial: "layouts/partials/menu" if user_signed_in? %>
       <%= yield %>
     </main>
+    <%= render "shared/confirm_modal" %>
   </body>
 </html>

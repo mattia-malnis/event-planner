@@ -21,6 +21,10 @@ class Event < ApplicationRecord
     .ordered
   end
 
+  def open_for_registration?
+    date_end.present? ? Time.current <= date_end : Time.current <= date_start
+  end
+
   private
 
   def end_date_after_start_date
