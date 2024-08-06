@@ -13,13 +13,6 @@ module EventsHelper
     safe_join(r.compact_blank, tag.br)
   end
 
-  def subscribed_mark(event)
-    return if event.blank?
-    return unless current_user.signed_up_for_event?(event)
-
-    inline_svg_tag("check-circle.svg", class: "size-6 absolute text-white drop-shadow-md right-2.5 top-2.5")
-  end
-
   def action_button(event)
     return unless event.open_for_registration?
 

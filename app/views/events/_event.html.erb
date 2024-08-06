@@ -6,7 +6,6 @@
         <% if event.image.attached? %> style="background-image: url('<%= url_for(event.image.variant(:small)) %>');"<% end %>>
       </div>
       <div class="relative z-1 h-full">
-        <%= subscribed_mark(event) if @show_all %>
         <%= image_tag event.image.variant(:small), class: "rounded-t h-full w-full object-contain" if event.image.attached? %>
       </div>
     </div>
