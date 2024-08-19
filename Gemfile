@@ -47,6 +47,12 @@ gem "devise", "~> 4.9", ">= 4.9.4"
 # Embed SVG documents in your Rails views and style them with CSS [https://github.com/jamesmartin/inline_svg]
 gem "inline_svg", "~> 1.9"
 
+# Pagination gem [https://github.com/ddnexus/pagy]
+gem "pagy", "~> 9.0"
+
+# Background Jobs [https://github.com/bensheldon/good_job]
+gem "good_job", "~> 4.2"
+
 group :development, :test do
   # A static analysis security vulnerability scanner for Ruby on Rails applications [https://github.com/presidentbeef/brakeman]
   gem "brakeman", require: false
@@ -71,12 +77,6 @@ group :development, :test do
 
   # A Ruby gem to load environment variables from `.env` [https://github.com/bkeepers/dotenv]
   gem "dotenv-rails", "~> 3.1", ">= 3.1.2"
-
-  # Pagination gem [https://github.com/ddnexus/pagy]
-  gem "pagy", "~> 9.0"
-
-  # Background Jobs [https://github.com/bensheldon/good_job]
-  gem "good_job", "~> 4.1"
 
   # Rails N+1 queries auto-detection [https://github.com/charkost/prosopite]
   gem "prosopite", "~> 1.4", ">= 1.4.2"
@@ -108,5 +108,5 @@ group :test do
   gem "factory_bot_rails", "~> 6.4"
 
   # Simple one-liner tests for common Rails functionality [https://github.com/thoughtbot/shoulda-matchers]
-  gem "shoulda-matchers", "~> 6.2"
+  gem "shoulda-matchers", "~> 6.4"
 end
