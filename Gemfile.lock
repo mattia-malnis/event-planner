@@ -195,7 +195,7 @@ GEM
     matrix (0.4.2)
     mini_magick (4.13.2)
     mini_mime (1.1.5)
-    minitest (5.24.1)
+    minitest (5.25.1)
     msgpack (1.7.2)
     net-imap (0.4.14)
       date
@@ -220,7 +220,7 @@ GEM
     pg (1.5.7)
     pg_query (5.1.0)
       google-protobuf (>= 3.22.3)
-    propshaft (0.9.0)
+    propshaft (0.9.1)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
       rack
