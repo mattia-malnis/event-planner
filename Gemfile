@@ -76,7 +76,7 @@ group :development, :test do
   gem "pagy", "~> 9.0"
 
   # Background Jobs [https://github.com/bensheldon/good_job]
-  gem "good_job", "~> 4.1"
+  gem "good_job", "~> 4.2"
 
   # Rails N+1 queries auto-detection [https://github.com/charkost/prosopite]
   gem "prosopite", "~> 1.4", ">= 1.4.2"
