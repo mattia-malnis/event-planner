@@ -39,7 +39,7 @@ gem "bootsnap", require: false
 gem "image_processing", "~> 1.13"
 
 # Use Redis for Action Cable
-gem "redis", "~> 5.2"
+gem "redis", "~> 5.3"
 
 # Flexible authentication solution for Rails with Warden [https://github.com/heartcombo/devise]
 gem "devise", "~> 4.9", ">= 4.9.4"
