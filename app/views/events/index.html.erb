@@ -1,9 +1,11 @@
 <% content_for(:title) { "Events" } %>
 
 <div class="min-h-full w-full sm:w-11/12 xl:w-8/12 mx-auto px-4 lg:px-0 py-8 lg:py-12">
-  <% if @events.present? %>
-    <%= render partial: "all_events_listing" %>
-  <% else %>
-    <%= render partial: "no_events" %>
-  <% end %>
+  <h1 class="text-3xl">Discover upcoming events</h1>
+  <p class="mt-2 mb-12">
+    Browse through our diverse collection of upcoming events. Whether you're looking for entertainment, education, or networking opportunities, you'll find something that piques your interest. Curious about events you've subscribed to? <%= link_to "View your subscribed events", subscribed_events_path, class: "underline" %>
+  </p>
+
+  <%= render partial: "filters" %>
+  <%= render partial: "events" %>
 </div>
