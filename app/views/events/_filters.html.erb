@@ -1,5 +1,6 @@
 <div class="my-5">
-  <%= form_with url: request.path, method: :get, class: "max-w-sm", data: { turbo_frame: "listing", turbo_action: "advance", controller: "autosubmit" } do %>
-    <%= select_tag :filter, options_for_select([["Upcoming events", "upcoming"], ["All events", "all"], ["Past events", "past"]], params[:filter]), { class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5", autocomplete: "off", data: { action: "autosubmit#onSelectChange" } } %>
+  <%= form_with url: request.path, method: :get, class: "md:flex md:items-center md:space-x-4", data: { turbo_frame: "listing", turbo_action: "advance", controller: "autosubmit" } do %>
+    <%= select_tag :filter, options_for_select([["Upcoming events", "upcoming"], ["All events", "all"], ["Past events", "past"]], params[:filter]), { class: "min-w-full md:min-w-[180px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5", autocomplete: "off", data: { action: "autosubmit#onSelectChange" } } %>
+    <%= text_field_tag :date, params[:date], { class: "min-w-full md:min-w-0 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5", autocomplete: "off", placeholder: "Select a date", data: { controller: "date-picker", action: "autosubmit#onSelectChange" } } %>
   <% end %>
 </div>

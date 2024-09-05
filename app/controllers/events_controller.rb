@@ -45,7 +45,15 @@ class EventsController < ApplicationController
   end
 
   def filter_and_paginate_events
-    @events = case params[:filter]
+    @events = filter_by_type(params[:filter])
+    @events = filter_by_date_range(params[:date]) if params[:date].present?
+    @events = @events.ordered_with_country
+
+    @pagy, @events = pagy(@events)
+  end
+
+  def filter_by_type(filter)
+    case filter
     when "all"
       @events
     when "past"
@@ -53,9 +61,14 @@ class EventsController < ApplicationController
     else
       @events.upcoming
     end
+  end
 
-    @events = @events.ordered_with_country
-    @pagy, @events = pagy(@events)
+  def filter_by_date_range(date_param)
+    date_start, date_end = date_param.split(" to ")
+    return @events unless date_start.present? && date_end.present?
+
+    date_end = date_end.to_date.at_end_of_day
+    @events.where(date_start: date_start..date_end).or(@events.where(date_end: date_start..date_end))
   end
 
   # Finds the event by ID or renders a 404 page if not found

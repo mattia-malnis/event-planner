@@ -1,4 +1,4 @@
-<div class="rounded shadow-lg shadow-gray-200 bg-white duration-300 hover:-translate-y-1">
+<div class="group rounded-md shadow-lg shadow-gray-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden">
   <%= link_to event_path(event), class: "cursor-pointer" do %>
     <div class="relative overflow-hidden rounded-t h-72 w-full">
       <div
@@ -10,9 +10,9 @@
       </div>
     </div>
 
-    <div class="py-8 px-6">
-      <h3 class="text-xl mb-4 leading-6"><%= event.title %></h3>
-      <p class="text-gray-500 leading-5 text-sm">
+    <div class="p-6">
+      <h3 class="text-lg sm:text-xl mb-2 text-gray-900"><%= event.title %></h3>
+      <p class="text-gray-600 text-sm">
         <%= to_date(event.date_start) %> <br>
         <%= event.city %>, <%= event.country_name %>
       </p>
