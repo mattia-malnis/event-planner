@@ -51,7 +51,7 @@ gem "inline_svg", "~> 1.9"
 gem "pagy", "~> 9.1"
 
 # Background Jobs [https://github.com/bensheldon/good_job]
-gem "good_job", "~> 4.4"
+gem "good_job", "~> 4.5"
 
 group :development, :test do
   # A static analysis security vulnerability scanner for Ruby on Rails applications [https://github.com/presidentbeef/brakeman]
