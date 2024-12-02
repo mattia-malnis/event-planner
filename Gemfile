@@ -48,7 +48,7 @@ gem "devise", "~> 4.9", ">= 4.9.4"
 gem "inline_svg", "~> 1.9"
 
 # Pagination gem [https://github.com/ddnexus/pagy]
-gem "pagy", "~> 9.1"
+gem "pagy", "~> 9.3"
 
 # Background Jobs [https://github.com/bensheldon/good_job]
 gem "good_job", "~> 4.4"
