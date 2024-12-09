@@ -152,10 +152,10 @@ GEM
       fugit (>= 1.11.0)
       railties (>= 6.1.0)
       thor (>= 1.0.0)
-    google-protobuf (4.28.3-arm64-darwin)
+    google-protobuf (4.29.1-arm64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.28.3-x86_64-linux)
+    google-protobuf (4.29.1-x86_64-linux)
       bigdecimal
       rake (>= 13)
     i18n (1.14.6)
@@ -220,8 +220,8 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.9)
-    pg_query (5.1.0)
-      google-protobuf (>= 3.22.3)
+    pg_query (6.0.0)
+      google-protobuf (>= 3.25.3)
     propshaft (1.1.0)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
@@ -405,7 +405,7 @@ DEPENDENCIES
   letter_opener (~> 1.10)
   pagy (~> 9.1)
   pg (~> 1.5)
-  pg_query (~> 5.1)
+  pg_query (~> 6.0)
   propshaft
   prosopite (~> 1.4, >= 1.4.2)
   puma (>= 5.0)
