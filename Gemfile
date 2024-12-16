@@ -76,7 +76,7 @@ group :development, :test do
   gem "ffaker", "~> 2.23"
 
   # A Ruby gem to load environment variables from `.env` [https://github.com/bkeepers/dotenv]
-  gem "dotenv-rails", "~> 3.1", ">= 3.1.2"
+  gem "dotenv-rails", "~> 3.1"
 
   # Rails N+1 queries auto-detection [https://github.com/charkost/prosopite]
   gem "prosopite", "~> 1.4", ">= 1.4.2"
